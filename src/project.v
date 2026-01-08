@@ -71,7 +71,7 @@ module tt_um_Contador_Completo (
     Contador_Completo Contador_Completo_Unit (
         .clk(clk),           
         .rst(rst_n),
-        .enable(w_enable),      // <--- AQUI CONECTAMOS EL ENABLE
+        .enable(enable),      
         .seg_out(w_seg_out), 
         .digit_sel(w_digit_sel) 
     );
