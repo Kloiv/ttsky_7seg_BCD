@@ -11,12 +11,12 @@ Contador de 8 bits con un BCD para displays de 7 segmentos.
 
 ## How it works
 
-Explain how your project works
+Si
 
 ## How to test
 
-Explain how to use your project
+Con un 7 segmentos de 3 displays
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Cyclone IV
