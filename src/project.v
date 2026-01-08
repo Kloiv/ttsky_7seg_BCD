@@ -45,20 +45,14 @@ module tt_um_Contador_Completo (
 );
 
     wire [6:0] w_seg_out;    
-    wire [2:0] w_digit_sel;
-    wire enable;     
-    
-    // Conectamos la entrada 0 al cable de enable
-    assign enable = ui_in[0]; 
-
+    wire [2:0] w_digit_sel;  
     assign uo_out = {1'b0, w_seg_out};
     assign uio_out = {5'b00000, w_digit_sel};
     assign uio_oe  = 8'b00000111;
     
     Contador_Completo Contador_Completo_Unit (
         .clk(clk),           
-        .rst(rst_n),
-        .enable(enable),      
+        .rst(rst_n),     
         .seg_out(w_seg_out), 
         .digit_sel(w_digit_sel) 
     );
