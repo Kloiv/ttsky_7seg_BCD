@@ -3,7 +3,7 @@ project:
   title:        "Contador con BCD"      # Project title
   author:       "Edgar Gael Escarcega Escalona"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "Prueba fisica de un BCD"      # One line description of what your project does
+  description:  "Prueba fisica de un BCD xd"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     10000000       # Clock frequency in Hz (or 0 if not applicable)
 
