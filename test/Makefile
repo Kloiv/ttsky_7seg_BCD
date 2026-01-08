@@ -28,11 +28,7 @@ VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_f
 
 # this gets copied in by the GDS action workflow
 VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
-# Incluye el archivo principal del proyecto
-VERILOG_SOURCES += $(PWD)/../src/project.v
 
-# --- AGREGA ESTA LÍNEA EXACTAMENTE ASÍ: ---
-VERILOG_SOURCES += $(PWD)/../src/Contador_Completo.v
 endif
 
 # Allow sharing configuration between design and testbench via `include`:
