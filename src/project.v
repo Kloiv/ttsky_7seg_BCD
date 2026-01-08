@@ -31,9 +31,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/*
+ * Copyright (c) 2024 Your Name
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 `default_nettype none
 
-module tt_um_Contador_Completo (
+module tt_um_example (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -44,18 +49,24 @@ module tt_um_Contador_Completo (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+
     wire [6:0] w_seg_out;    
-    wire [2:0] w_digit_sel;  
+    wire [2:0] w_digit_sel;
+    wire       w_enable;     
+
+    assign w_enable = ui_in[0]; 
+
     assign uo_out = {1'b0, w_seg_out};
     assign uio_out = {5'b00000, w_digit_sel};
     assign uio_oe  = 8'b00000111;
-    
+
+
     Contador_Completo Contador_Completo_Unit (
         .clk(clk),           
-        .rst(rst_n),     
+        .rst(rst_n),
+        .enable(w_enable),     
         .seg_out(w_seg_out), 
         .digit_sel(w_digit_sel) 
     );
-     wire _unused = &{ena, ui_in[7:1], uio_in, 1'b0}; // ui_in[0] ya no es "unused"
-
+  wire _unused = &{ena, ui_in[7:1], uio_in, 1'b0};
 endmodule
