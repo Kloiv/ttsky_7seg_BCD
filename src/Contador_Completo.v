@@ -1,6 +1,7 @@
 module Contador_Completo (
     input  wire clk,         // Reloj de 50MHz
     input  wire rst,         // Botón en PIN 23 (Activo en 0)
+	input  wire enable,
     output reg  [6:0] seg_out,   // Salida compartida
     output reg  [2:0] digit_sel  // Selector de dígito
 );
@@ -107,5 +108,6 @@ module Contador_Completo (
             default: seg_out = 7'b1111111; // Apagado
         endcase
     end
+
 
 endmodule
