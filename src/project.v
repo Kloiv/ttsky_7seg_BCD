@@ -44,16 +44,9 @@ module tt_um_Contador_Completo (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    // ==========================================
-    // 1. CABLES INTERNOS
-    // ==========================================
     wire [6:0] w_seg_out;    
     wire [2:0] w_digit_sel;
-    wire       enable;     
-
-    // ==========================================
-    // 2. CONEXIONES
-    // ==========================================
+    wire enable;     
     
     // Conectamos la entrada 0 al cable de enable
     assign enable = ui_in[0]; 
@@ -61,12 +54,6 @@ module tt_um_Contador_Completo (
     assign uo_out = {1'b0, w_seg_out};
     assign uio_out = {5'b00000, w_digit_sel};
     assign uio_oe  = 8'b00000111;
-
-    wire _unused = &{ena, ui_in[7:1], uio_in, 1'b0}; // ui_in[0] ya no es "unused"
-
-    // ==========================================
-    // 3. INSTANCIACIÓN
-    // ==========================================
     
     Contador_Completo Contador_Completo_Unit (
         .clk(clk),           
@@ -75,5 +62,6 @@ module tt_um_Contador_Completo (
         .seg_out(w_seg_out), 
         .digit_sel(w_digit_sel) 
     );
+     wire _unused = &{ena, ui_in[7:1], uio_in, 1'b0}; // ui_in[0] ya no es "unused"
 
 endmodule
