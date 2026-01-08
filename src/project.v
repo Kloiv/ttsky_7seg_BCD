@@ -33,7 +33,7 @@
 
 `default_nettype none
 
-module tt_um_Contador_Completo (
+module tt_um_example (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -44,30 +44,36 @@ module tt_um_Contador_Completo (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-    // Estos cables llevan las señales desde tu módulo hacia los pines de salida
-    wire [6:0] w_seg_out;    // Cable para los segmentos
-    wire [2:0] w_digit_sel;  // Cable para el selector de dígitos
+    // ==========================================
+    // 1. CABLES INTERNOS
+    // ==========================================
+    wire [6:0] w_seg_out;    
+    wire [2:0] w_digit_sel;
+    wire       enable;     
 
+    // ==========================================
+    // 2. CONEXIONES
+    // ==========================================
     
-    // Conectamos los segmentos (7 bits) a la salida dedicada uo_out.
-    // uo_out[7] queda en 0 (punto decimal apagado).
+    // Conectamos la entrada 0 al cable de enable
+    assign enable = ui_in[0]; 
+
     assign uo_out = {1'b0, w_seg_out};
-
-    // Conectamos el selector (3 bits) a los pines bidireccionales uio_out.
-    // Los bits superiores se ponen a 0.
     assign uio_out = {5'b00000, w_digit_sel};
-
-    // Configuramos uio_oe para que los pines que usamos sean SALIDAS (1).
-    // Los 3 primeros bits (uio[0], uio[1], uio[2]) son salidas.
     assign uio_oe  = 8'b00000111;
+
+    wire _unused = &{ena, ui_in[7:1], uio_in, 1'b0}; // ui_in[0] ya no es "unused"
+
+    // ==========================================
+    // 3. INSTANCIACIÓN
+    // ==========================================
     
     Contador_Completo Contador_Completo_Unit (
-        .clk(clk),           // Conecta el reloj del sistema al reloj del módulo
-        .rst(rst_n),         // Conecta el reset (activo bajo) del sistema
-        .seg_out(w_seg_out), // Conecta la salida de segmentos a nuestro cable
-        .digit_sel(w_digit_sel) // Conecta el selector a nuestro cable
+        .clk(clk),           
+        .rst(rst_n),
+        .enable(w_enable),      // <--- AQUI CONECTAMOS EL ENABLE
+        .seg_out(w_seg_out), 
+        .digit_sel(w_digit_sel) 
     );
-    // Evitamos advertencias sobre señales que tu contador no usa (como ui_in).
-    wire _unused = &{ena, ui_in, uio_in, 1'b0};
 
 endmodule
