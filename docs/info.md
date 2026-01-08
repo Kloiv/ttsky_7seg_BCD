@@ -7,6 +7,8 @@ You can also include images in this folder and reference them in the markdown. E
 512 kb in size, and the combined size of all images must be less than 1 MB.
 -->
 
+Contador de 8 bits con un BCD para displays de 7 segmentos
+
 ## How it works
 
 Explain how your project works
